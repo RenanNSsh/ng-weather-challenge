@@ -14,6 +14,7 @@ import {routing} from "./app.routing";
 import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { WeatherDecoratorService } from './weather-decorator.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { environment } from '../environments/environment';
     routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LocationService, WeatherService],
+  providers: [LocationService, {provide: WeatherService, useClass: WeatherDecoratorService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

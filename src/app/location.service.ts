@@ -1,33 +1,48 @@
-import { Injectable } from '@angular/core';
-import {WeatherService} from "./weather.service";
+import { Injectable, Signal, effect, signal } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 export const LOCATIONS : string = "locations";
 
-@Injectable()
+export type Location = string;
+
+@Injectable({providedIn: 'root'})
 export class LocationService {
 
-  locations : string[] = [];
+  private readonly locationAdded = new Subject<Location>();
+  private readonly locationRemoved = new Subject<Location>();
+  private readonly locations = signal<Location[]>(this.getInitialLocations());
+  locationAdded$: Observable<Location> = this.locationAdded;
+  locationRemoved$: Observable<Location> = this.locationRemoved;
 
-  constructor(private weatherService : WeatherService) {
+  private _effectStorage = effect(() => {
+    localStorage.setItem(LOCATIONS, JSON.stringify(this.locations()));
+  });
+
+  private getInitialLocations(): Location[] {
     let locString = localStorage.getItem(LOCATIONS);
-    if (locString)
-      this.locations = JSON.parse(locString);
-    for (let loc of this.locations)
-      this.weatherService.addCurrentConditions(loc);
+    if (locString) {
+      return JSON.parse(locString);
+    }
+    return [];
   }
 
-  addLocation(zipcode : string) {
-    this.locations.push(zipcode);
-    localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
-    this.weatherService.addCurrentConditions(zipcode);
+  getLocations(): Signal<Location[]>{
+    return this.locations.asReadonly();
   }
 
-  removeLocation(zipcode : string) {
-    let index = this.locations.indexOf(zipcode);
+  addLocation(locationToAdd: Location) {
+    this.locations.update((locations) => [...locations, locationToAdd]);
+    this.locationAdded.next(locationToAdd);
+  }
+
+  removeLocation(locationToRemove: Location) {
+    const currentLocations = this.locations();
+
+    let index = currentLocations.indexOf(locationToRemove);
     if (index !== -1){
-      this.locations.splice(index, 1);
-      localStorage.setItem(LOCATIONS, JSON.stringify(this.locations));
-      this.weatherService.removeCurrentConditions(zipcode);
+      currentLocations.splice(index, 1); 
+      this.locations.set(currentLocations);
+      this.locationRemoved.next(locationToRemove);
     }
   }
 }
