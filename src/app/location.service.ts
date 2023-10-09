@@ -3,10 +3,14 @@ import { Observable, Subject } from 'rxjs';
 
 export const LOCATIONS : string = "locations";
 
-export type Location = string;
+export type Location = {
+  code: string;
+  id: number;
+};
 
 @Injectable({providedIn: 'root'})
 export class LocationService {
+  private static id = 0;
 
   private readonly locationAdded = new Subject<Location>();
   private readonly locationRemoved = new Subject<Location>();
@@ -18,10 +22,19 @@ export class LocationService {
     localStorage.setItem(LOCATIONS, JSON.stringify(this.locations()));
   });
 
+  constructor() {
+    const locations = this.locations();
+    const lastLocation = locations[locations.length -1];
+    if(lastLocation?.id) {
+      LocationService.id =  lastLocation?.id + 1; 
+    }
+  }
+
   private getInitialLocations(): Location[] {
     let locString = localStorage.getItem(LOCATIONS);
     if (locString) {
-      return JSON.parse(locString);
+      const locations = JSON.parse(locString);
+      return locations;
     }
     return [];
   }
@@ -30,7 +43,11 @@ export class LocationService {
     return this.locations.asReadonly();
   }
 
-  addLocation(locationToAdd: Location) {
+  addLocation(locationCode: string) {
+    const locationToAdd = {
+      code: locationCode,
+      id: LocationService.id++
+    };
     this.locations.update((locations) => [...locations, locationToAdd]);
     this.locationAdded.next(locationToAdd);
   }

@@ -1,0 +1,32 @@
+.tab-header{
+    display: flex;
+    gap: 2px;
+    overflow: auto;
+    width: 100%;
+}
+
+.tab-header__item{
+    padding: 4px 8px;
+    border: 1px solid #000;
+    border-bottom: none;
+    cursor: pointer;
+    display: flex;
+}
+
+.tab-header__item-name{
+    width: max-content;
+}
+
+.tab-header__item--active{
+    background-color: #031633;
+}
+
+.tab-header__close{
+    font-weight: bold;
+    padding-left: 1rem;
+}
+
+.tab-container{
+    border: 1px solid #000;
+    padding: 20px;
+}

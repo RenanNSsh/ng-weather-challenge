@@ -1,0 +1,15 @@
+<div class="tab-header">
+  <div 
+    *ngFor="let tab of tabs; let index = index" 
+    class="tab-header__item bg-primary"
+    [class.tab-header__item--active]="selectedTab === index"
+    (click)="selectTab(index)">
+    <div class="tab-header__item-name">
+      {{tab.name}}
+    </div>
+     <div class="tab-header__close" (click)="closeTab(index)">X</div>
+  </div>
+</div>
+<div class="tab-container" *ngIf="tabs.length">
+  <div #container></div>
+</div>

@@ -7,7 +7,6 @@ import { ZipcodeEntryComponent } from './zipcode-entry/zipcode-entry.component';
 import {LocationService} from "./location.service";
 import { ForecastsListComponent } from './forecasts-list/forecasts-list.component';
 import {WeatherService} from "./weather.service";
-import { CurrentConditionsComponent } from './current-conditions/current-conditions.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import {RouterModule} from "@angular/router";
 import {routing} from "./app.routing";
@@ -15,6 +14,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { WeatherDecoratorService } from './weather-decorator.service';
+import { TabsComponent } from './tabs/tabs.component';
+import { CurrentConditionsComponent } from './current-conditions/current-conditions.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WeatherDecoratorService } from './weather-decorator.service';
     ZipcodeEntryComponent,
     ForecastsListComponent,
     CurrentConditionsComponent,
-    MainPageComponent
+    MainPageComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { WeatherDecoratorService } from './weather-decorator.service';
     HttpClientModule,
     RouterModule,
     routing,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: true })
   ],
   providers: [LocationService, {provide: WeatherService, useClass: WeatherDecoratorService}],
   bootstrap: [AppComponent]
