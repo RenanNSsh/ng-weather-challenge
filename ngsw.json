@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1696897412994,
+  "timestamp": 1696897543812,
   "index": "/ng-weather-challenge/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/ng-weather-challenge/271.d03f3f10d1aa07ae.js",
         "/ng-weather-challenge/favicon.ico",
         "/ng-weather-challenge/index.html",
-        "/ng-weather-challenge/main.333c649bb07d83e8.js",
+        "/ng-weather-challenge/main.08cfed904dafc8af.js",
         "/ng-weather-challenge/polyfills.1aa18cd3903be6e2.js",
         "/ng-weather-challenge/runtime.ed1753c0b51e194e.js",
         "/ng-weather-challenge/styles.5a844b9747babb89.css"
@@ -70,8 +70,8 @@
     "/ng-weather-challenge/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/ng-weather-challenge/assets/weather.json": "5ce53747ac7b830cab8740514bba77459926438a",
     "/ng-weather-challenge/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/ng-weather-challenge/index.html": "97fd617959c8cd82d96e0dc5e23410c14e5f5538",
-    "/ng-weather-challenge/main.333c649bb07d83e8.js": "09bfecb40cebbbe20f69d7be348a1d599cf4aa5a",
+    "/ng-weather-challenge/index.html": "530e03880c0468d4f2fd75a33db52ac0f875c679",
+    "/ng-weather-challenge/main.08cfed904dafc8af.js": "882f57b94545c2c4c17c0fa0e557d284bbe6b081",
     "/ng-weather-challenge/polyfills.1aa18cd3903be6e2.js": "3f1f560223639acff1549d399e1c3f07373da5ba",
     "/ng-weather-challenge/runtime.ed1753c0b51e194e.js": "02388a87a1878937ceb1da0e6e24b54e55accbe1",
     "/ng-weather-challenge/styles.5a844b9747babb89.css": "a4c4de54f0bacd4e7ff58c0837d3dd06ba3322b8"
